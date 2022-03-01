@@ -16,10 +16,10 @@ from userbot.events import man_cmd
 
 # ========================= CONSTANTS ============================
 AFKSTR = [
-    f"**Maaf {owner} Sedang OFF!**",
-    f"**Maaf {owner} Sedang OFF Tunggu Sampai Online!**",
-    f"**{owner} Sedang OFF Tunggulah Sampai Online**",
-    f"**Maaf {owner} Sedang OFF!**",
+    f"**Maaf {owner} Lagi Sibuk!**",
+    f"**Maaf {owner} Lagi Sibuk Tunggu Sampai Online!**",
+    f"**{owner} Lagi Sibuk Tunggulah Sampai Online**",
+    f"**Maaf {owner} Lagi Sibuk!**",
 ]
 ISAFK = False
 USER_AFK = {}
@@ -47,23 +47,23 @@ async def set_afk(afk_e):
     if string:
         AFKREASON = string
         await afk_e.edit(
-            f"**✘ {owner} Telah OFF ✘**\
+            f"**۩۩ {owner} Sedang Sibuk ۩۩**\
         \n✦҈͜͡➳ **Karena :** `{string}`"
         )
     else:
-        await afk_e.edit(f"**✘ {owner} Telah OFF ✘**")
+        await afk_e.edit(f"**۩۩ {owner} Sedang Sibuk ۩۩**")
     if user.last_name:
         await afk_e.client(
             UpdateProfileRequest(
-                first_name=user.first_name, last_name=user.last_name + "【 OFF 】"
+                first_name=user.first_name, last_name=user.last_name + "【 Sibuk 】"
             )
         )
     else:
         await afk_e.client(
-            UpdateProfileRequest(first_name=user.first_name, last_name="【 OFF 】")
+            UpdateProfileRequest(first_name=user.first_name, last_name="【 Sibuk 】")
         )
     if BOTLOG_CHATID:
-        await afk_e.client.send_message(BOTLOG_CHATID, f"#OFF\n**{owner} Telah OFF!**")
+        await afk_e.client.send_message(BOTLOG_CHATID, f"#OFF\n**{owner} Sedang Sibuk!**")
     ISAFK = True
     afk_time = datetime.now()
     raise StopPropagation
@@ -89,7 +89,7 @@ async def type_afk_is_not_true(notafk):
     afk_end = back_alive.replace(microsecond=0)
     if ISAFK:
         ISAFK = False
-        msg = await notafk.respond(f"**{owner} Telah Kembali!**")
+        msg = await notafk.respond(f"**{owner} Aktif Kembali!**")
         time.sleep(7)
         await msg.delete()
         await notafk.client(
@@ -168,7 +168,7 @@ async def mention_afk(mention):
         if mention.sender_id not in USERS:
             if AFKREASON:
                 await mention.reply(
-                    f"**✘ {owner} Sedang OFF ✘** {afk_since} **Yang Lalu.**\
+                    f"**۩۩ {owner} Sedang Sibuk ۩۩** {afk_since} **Yang Lalu.**\
                         \n✦҈͜͡➳ **Karena :** `{AFKREASON}`"
                 )
             else:
@@ -178,7 +178,7 @@ async def mention_afk(mention):
             if USERS[mention.sender_id] % randint(2, 4) == 0:
                 if AFKREASON:
                     await mention.reply(
-                        f"**✘ {owner} Masih OFF ✘** {afk_since} **Yang Lalu.**\
+                        f"**۩۩ {owner} Masih Off sibuk ۩۩** {afk_since} **Yang Lalu.**\
                             \n✦҈͜͡➳ **Karena :** `{AFKREASON}`"
                     )
                 else:
@@ -247,7 +247,7 @@ async def afk_on_pm(sender):
             if sender.sender_id not in USERS:
                 if AFKREASON:
                     await sender.reply(
-                        f"✘ **{owner} Sedang OFF ✘** {afk_since} **Yang Lalu** ✘.\
+                        f"۩۩ **{owner} Sedang Sibuk ۩۩** {afk_since} **Yang Lalu** ۩۩.\
                         \n✦҈͜͡➳ **Karena :** `{AFKREASON}`"
                     )
                 else:
@@ -258,7 +258,7 @@ async def afk_on_pm(sender):
                 if USERS[sender.sender_id] % randint(2, 4) == 0:
                     if AFKREASON:
                         await sender.reply(
-                            f"✘ **{owner} Sedang OFF ✘** {afk_since} **Yang Lalu. ✘**\
+                            f"۩۩ **{owner} Sedang Sibuk ۩۩** {afk_since} **Yang Lalu. ۩۩**\
                             \n✦҈͜͡➳ **Karena :** `{AFKREASON}`"
                         )
                     else:
